@@ -1,12 +1,27 @@
 import { useState } from 'react' 
+import api from '../services/api';
 
-export default function CadastroUsuario(){
+const CadastroUsuario = () => {
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
-        console.log(`dados para enviar ao node: ${nome}, ${email}`);
+
+        const novoUsuario = {nome:nome, email:email};
+
+        try{
+            console.log(`dados para enviar ao node: ${nome}, ${email}`);
+            const response = await api.post('/add', novoUsuario);
+            alert(response.data);
+            setNome("")
+            setEmail("")
+            
+        } catch(err) {
+            alert(`erro ao cadastrar o usuario: ${err}`)
+            console.log(`erro ao cadastrar o usuario: ${err}`);
+        }
+
     } 
 
     return (
@@ -26,3 +41,5 @@ export default function CadastroUsuario(){
     </div>
     )
 }
+
+export default CadastroUsuario;

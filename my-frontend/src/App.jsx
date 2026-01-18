@@ -1,8 +1,9 @@
-// import { useState } from 'react'
+// import { useEffect, useState } from 'react'
 import './App.css'
 import CadastroUsuario from './pages/CadastroUsuario'
 import ListaUsuarios from './pages/ListaUsuarios'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+// import api from './services/api';
 
 function App() {
 
@@ -22,7 +23,7 @@ function App() {
       <div className="container">
         <Routes>
           <Route path="/lista" element={<ListaUsuarios />} />
-          <Route path="/cadastrar" element={<CadastroUsuario />} />
+          <Route path="/cadastrar" element={<CadastroUsuario/>} />
         </Routes>
       </div>
 

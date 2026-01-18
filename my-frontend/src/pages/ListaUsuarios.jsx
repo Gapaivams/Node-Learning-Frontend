@@ -1,10 +1,22 @@
-// import { useState } from 'react' 
+import { useState, useEffect } from 'react' 
+import api from '../services/api';
 
 
 export default function ListaUsuarios() {
-  const usuarios = [
-    { id: 1, nome: "João Silva", email: "joao@email.com" }
-  ];
+  const [usuarios, setUsuarios] = useState([]);
+
+
+  useEffect(() => {
+    const getUsuarios = async () => {
+    try{
+      const response = await api.get('/users');
+      setUsuarios(response.data);
+    } catch(err) {
+      console.log(`Erro ao pegar o usuario: ${err}`);      
+    }
+  }
+    getUsuarios();
+  }, []);
 
   return (
     <div className="mt-4 table-container">
